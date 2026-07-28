@@ -1,0 +1,435 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Latar belakang gradasi romantis yang dalam & hangat */
+  --bg-gradient: linear-gradient(135deg, #0e0817 0%, #1a0b2e 45%, #2a0c23 75%, #12031a 100%);
+  
+  /* Kartu Glassmorphism & Border */
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.12);
+  
+  /* Akses Warna Elemen (Tombol, Amplop, Highlight) */
+  --accent-rose: #e63946;
+  --accent-pink: #f72585;
+  --accent-gold: #ffb703;
+  --accent-purple: #7209b7;
+  
+  /* Teks (Dibuat Nyaman Dibaca, Tidak Terlalu Cerah/Menyilaukan) */
+  --text-primary: #f8f9fa;   /* Putih lembut untuk judul */
+  --text-body: #d1c7bd;      /* Abu-abu hangat mudah dibaca untuk paragraf */
+  --text-muted: #a095a8;     /* Warna teks sekunder */
+  
+  --glow-soft: rgba(247, 37, 133, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Floating Particles (Halus di background) */
+#heart-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floating-heart {
+  position: absolute;
+  opacity: 0.35;
+  animation: floatUp linear infinite;
+  filter: drop-shadow(0 0 5px rgba(247, 37, 133, 0.3));
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) scale(0.5) rotate(0deg);
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Page Setup */
+.page {
+  display: none;
+  min-height: 100vh;
+  padding: 40px 20px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.page.active {
+  display: flex;
+  opacity: 1;
+}
+
+.scroll-page {
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* Typography Rapi & Tidak Menyilaukan */
+h1 {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+
+h2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.05rem;
+  color: #f72585;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+p {
+  color: var(--text-body);
+  line-height: 1.75;
+  font-size: 0.96rem;
+  font-weight: 400;
+}
+
+strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.small-text {
+  font-size: 0.82rem;
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Cards (Tampilan Elegan & Rapi) */
+.opening-content, .password-box, .envelope-content, 
+.letter-box, .timeline-card, .message-card, 
+.love-letter-container, .countdown-container, .ending-container {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.timeline-card, .message-card {
+  text-align: left;
+}
+
+.timeline-card h2, .message-card h2 {
+  text-align: left;
+}
+
+.timeline-card:hover, .message-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(247, 37, 133, 0.4);
+  box-shadow: 0 18px 35px var(--glow-soft);
+}
+
+/* Kartu Khusus Hari Jadian */
+.timeline-item.special .timeline-card {
+  border: 1px solid rgba(255, 183, 3, 0.5);
+  background: linear-gradient(135deg, rgba(247, 37, 133, 0.1), rgba(255, 183, 3, 0.08));
+  box-shadow: 0 10px 25px rgba(255, 183, 3, 0.15);
+}
+
+/* Tombol Elemen Romantis */
+button {
+  background: linear-gradient(135deg, #e63946, #f72585, #7209b7);
+  background-size: 200% 200%;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  padding: 14px 34px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(247, 37, 133, 0.35);
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(247, 37, 133, 0.5);
+}
+
+/* Password Input */
+input[type="password"] {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1px solid var(--card-border);
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+  outline: none;
+  margin: 18px 0 8px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="password"]:focus {
+  border-color: var(--accent-pink);
+}
+
+#passwordMessage {
+  font-size: 0.85rem;
+  margin-top: 8px;
+  min-height: 20px;
+}
+
+/* Frame Foto & Galeri */
+.photo-placeholder, .gallery-placeholder, .ending-photo {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 22px 15px;
+  margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: border-color 0.3s ease;
+}
+
+.photo-placeholder:hover, .gallery-placeholder:hover {
+  border-color: var(--accent-pink);
+}
+
+.photo-placeholder span, .gallery-placeholder span, .ending-photo span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+}
+
+/* Amplop Romantis */
+.envelope {
+  position: relative;
+  width: 170px;
+  height: 110px;
+  background: linear-gradient(135deg, #f72585, #b5179e);
+  border-radius: 12px;
+  margin: 30px auto;
+  cursor: pointer;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4), 0 0 15px var(--glow-soft);
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.envelope:hover {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 85px solid transparent;
+  border-right: 85px solid transparent;
+  border-top: 60px solid #ff4d8d;
+  transform-origin: top;
+  transition: transform 0.4s ease;
+  z-index: 2;
+}
+
+.envelope:hover .envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.envelope .heart {
+  font-size: 2rem;
+  z-index: 3;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Counter Box Countdown */
+.counter-grid {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 22px 0;
+}
+
+.counter-box {
+  background: linear-gradient(135deg, rgba(247, 37, 133, 0.12), rgba(114, 9, 183, 0.15));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 12px 14px;
+  border-radius: 16px;
+  min-width: 65px;
+  backdrop-filter: blur(8px);
+}
+
+.counter-box span {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+.counter-box small {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Surat Cinta */
+.love-letter-content {
+  display: none;
+  text-align: left;
+  margin-top: 20px;
+  background: rgba(10, 5, 18, 0.5);
+  padding: 22px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.love-letter-content.show {
+  display: block;
+  animation: fadeIn 0.8s ease;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================
+   FIX FOTO
+   ============================ */
+
+/* Foto di timeline */
+.photo-placeholder {
+  width: 100%;
+  height: 300px;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  display: block;
+  border-radius: 16px;
+}
+
+/* Gambar timeline */
+.photo-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* ============================
+   FIX GALERI
+   ============================ */
+
+.gallery-placeholder {
+  width: 100%;
+  height: 280px;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  display: block;
+  border-radius: 16px;
+}
+
+/* Gambar galeri */
+.gallery-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* ============================
+   FIX FOTO ENDING
+   ============================ */
+
+.ending-photo {
+  width: 100%;
+  max-width: 500px;
+  height: 350px;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  display: block;
+  border-radius: 20px;
+}
+
+/* Gambar ending */
+.ending-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
